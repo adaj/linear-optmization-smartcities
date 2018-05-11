@@ -1,3 +1,13 @@
+"""
+Implementation of "The maximum covering/shortest path problem:
+A multiobjective network design and routing formulation"
+by J.R.Current, C.S.Re Velle and J.L.Cohon (2085) https://doi.org/10.1016/0377-2217(85)90030-X
+
+(it still have subtours as the model in the paper is incomplete)
+Author: Adelson Araujo Jr
+"""
+
+
 import pulp
 from scipy.spatial import distance
 
@@ -56,7 +66,7 @@ for j in nodes:# j = 'Gary'
         a = pulp.lpSum([xij['{}_{}'.format(i.split('_')[0],j)] for i in nj])
         b = pulp.lpSum([xij['{}_{}'.format(j,i.split('_')[0])] for i in nj])
         prob +=  a-b == 0, "constraint_enter_and_leave_for_{}".format(j)
-    
+
 for j in nodes:
     if j!='START':
         nj = [a for a in arcs if a.split('_')[1]==j]
@@ -79,4 +89,3 @@ for a in arcs:
     if varvalue > 0:
         print('  ',a)
 print('}')
-
