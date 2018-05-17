@@ -1,4 +1,4 @@
-"""
+    """
 Implementation of "The maximum covering/shortest path problem:
 A multiobjective network design and routing formulation"
 by J.R.Current, C.S.Re Velle and J.L.Cohon (2085) https://doi.org/10.1016/0377-2217(85)90030-X
@@ -48,8 +48,8 @@ aj = demand
 """Objective (mono)"""
 prob = pulp.LpProblem('1-MPSP', pulp.LpMaximize)
 
-alfa = 1
-prob += pulp.lpSum([alfa*aj[a.split('_')[1]]*xij[a] - (1-alfa)*dij[a]*xij[a] for a in arcs]), 'aZ1 - (1-a)Z2'
+alfa = 0.5
+prob += pulp.lpSum([(1-alfa)*aj[a.split('_')[1]]*xij[a] - (1-alfa)*dij[a]*xij[a] for a in arcs]), 'aZ1 - (1-a)Z2'
 
 """_______________"""
 
